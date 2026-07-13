@@ -169,57 +169,42 @@
       .controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 760px) {
-      body { min-height: 100dvh; }
-      main { width: calc(100% - 8px); margin: 4px auto; }
-      .card { border-radius: 12px; }
-      header { padding: 10px 10px 8px; }
-      h1 { margin-bottom: 4px; font-size: 16px; line-height: 1.05; }
+      main { width: min(100%, calc(100% - 12px)); margin: 6px auto; }
+      .card { border-radius: 14px; }
+      header { padding: 14px 14px 10px; }
+      h1 { margin-bottom: 6px; font-size: 18px; }
       .formula {
-        gap: 2px;
-        flex-wrap: nowrap;
-        white-space: nowrap;
-        font-size: 13px;
-        line-height: 1;
-      }
-      .frac { margin: 0 1px; }
-      .frac .top { padding: 0 0.12em 0.03em; }
-      .frac .bottom { padding: 0.03em 0.12em 0; }
-      .controls {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
         gap: 4px;
-        padding: 7px 8px;
+        font-size: 16px;
+        line-height: 1.06;
+      }
+      .controls {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+        padding: 10px 12px;
       }
       label {
-        gap: 3px;
-        min-width: 0;
-        font-size: 10px;
-        line-height: 1;
+        gap: 4px;
+        font-size: 11px;
       }
       input[type="number"] {
-        padding: 4px 5px;
-        border-radius: 7px;
-        font-size: 12px;
-        min-height: 29px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        font-size: 13px;
+        min-height: 34px;
       }
-      .dense-wrap { grid-column: auto; }
+      .dense-wrap {
+        grid-column: 1 / -1;
+      }
       .checklabel {
-        min-height: 29px;
-        padding: 4px;
-        justify-content: center;
-        gap: 0;
-        font-size: 0;
-        border-radius: 7px;
+        min-height: 34px;
+        padding: 6px 8px;
+        justify-content: flex-start;
+        font-size: 13px;
+        border-radius: 8px;
       }
-      .checklabel input[type="checkbox"] {
-        width: 16px;
-        height: 16px;
-      }
-      .plot-wrap {
-        height: calc(100dvh - 156px);
-        min-height: 280px;
-        padding: 5px;
-      }
-      .note { display: none; }
+      .plot-wrap { min-height: 330px; padding: 8px; }
+      .note { padding: 0 12px 12px; font-size: 11px; }
     }
   </style>
 </head>
@@ -250,11 +235,12 @@
       <label>c
         <input id="c" type="number" value="36" step="0.1">
       </label>
-      <label title="Even integer">m
+      <label>m (even integer)
         <input id="m" type="number" value="4" min="2" step="2">
       </label>
-      <label class="dense-wrap" title="Dense grid">Grid
-        <span class="checklabel"><input id="denseGrid" type="checkbox" aria-label="Enable dense grid">Enable</span>
+      <label class="dense-wrap">
+        Dense grid
+        <span class="checklabel"><input id="denseGrid" type="checkbox">Enable</span>
       </label>
     </div>
 
