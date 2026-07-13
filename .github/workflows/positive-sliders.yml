@@ -1,0 +1,48 @@
+name: Make sliders positive
+
+on:
+  push:
+    paths:
+      - .github/workflows/positive-sliders.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restrict parameters to positive values
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = {
+              '<input id="a" type="number" value="3" step="0.1">': '<input id="a" type="number" value="3" min="0.1" step="0.1">',
+              '<input id="aRange" class="mobile-range" type="range" min="-10" max="10" value="3" step="0.1" aria-label="a">': '<input id="aRange" class="mobile-range" type="range" min="0.1" max="10" value="3" step="0.1" aria-label="a">',
+              '<input id="b" type="number" value="1" step="0.1">': '<input id="b" type="number" value="1" min="0.1" step="0.1">',
+              '<input id="bRange" class="mobile-range" type="range" min="-10" max="10" value="1" step="0.1" aria-label="b">': '<input id="bRange" class="mobile-range" type="range" min="0.1" max="10" value="1" step="0.1" aria-label="b">',
+              '<input id="c" type="number" value="36" step="0.1">': '<input id="c" type="number" value="36" min="0.1" step="0.1">',
+              '<input id="cRange" class="mobile-range" type="range" min="0" max="72" value="36" step="0.1" aria-label="c">': '<input id="cRange" class="mobile-range" type="range" min="0.1" max="72" value="36" step="0.1" aria-label="c">',
+              '    if (id === "m") value = normalizeEvenInteger(value, 4);\n': '    if (id === "m") value = normalizeEvenInteger(value, 4);\n    else value = Math.max(0.1, value);\n',
+              '    const a = numValue("a", 3);\n    const b = numValue("b", 1);\n    const c = numValue("c", 36);\n': '    const a = Math.max(0.1, numValue("a", 3));\n    const b = Math.max(0.1, numValue("b", 1));\n    const c = Math.max(0.1, numValue("c", 36));\n',
+          }
+
+          for old, new in replacements.items():
+              text = text.replace(old, new)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit the change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Restrict sliders to positive values"
+          git push
