@@ -24,8 +24,8 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     main {
-      width: min(1200px, calc(100% - 28px));
-      margin: 24px auto;
+      width: min(1200px, calc(100% - 24px));
+      margin: 12px auto;
     }
     .card {
       background: var(--panel);
@@ -35,24 +35,24 @@
       overflow: hidden;
     }
     header {
-      padding: 22px 24px 18px;
+      padding: 18px 20px 14px;
       border-bottom: 1px solid var(--line);
     }
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(22px, 3vw, 34px);
-      line-height: 1.18;
+      margin: 0 0 8px;
+      font-size: clamp(20px, 2.7vw, 34px);
+      line-height: 1.15;
     }
     .formula {
       margin: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
       color: #111827;
       font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif;
       font-size: clamp(22px, 2.8vw, 34px);
-      line-height: 1.25;
+      line-height: 1.18;
     }
     .frac {
       display: inline-flex;
@@ -60,76 +60,80 @@
       align-items: center;
       vertical-align: middle;
       line-height: 1;
-      margin: 0 2px;
+      margin: 0 1px;
     }
     .frac .top {
-      border-bottom: 1.6px solid currentColor;
-      padding: 0 0.18em 0.08em;
+      border-bottom: 1.5px solid currentColor;
+      padding: 0 0.18em 0.06em;
     }
     .frac .bottom {
-      padding: 0.06em 0.18em 0;
+      padding: 0.04em 0.18em 0;
     }
     .bracket {
-      font-size: 1.08em;
+      font-size: 1.05em;
       line-height: 1;
       position: relative;
-      top: 0.02em;
+      top: 0.01em;
     }
     .controls {
       display: grid;
-      grid-template-columns: repeat(5, minmax(150px, 1fr));
-      gap: 12px;
-      padding: 16px 24px;
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      gap: 10px;
+      padding: 14px 20px;
       border-bottom: 1px solid var(--line);
       align-items: end;
     }
     label {
       display: grid;
-      gap: 6px;
+      gap: 5px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 650;
     }
     input[type="number"] {
       width: 100%;
       min-width: 0;
-      padding: 10px 11px;
+      padding: 8px 10px;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: #fff;
       color: var(--text);
       font: inherit;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
     }
     input[type="number"]:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(47, 99, 255, 0.14);
     }
+    .dense-wrap { min-width: 0; }
     .checklabel {
       display: flex;
       align-items: center;
-      gap: 10px;
-      min-height: 42px;
-      padding: 10px 12px;
+      justify-content: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 8px 10px;
       border: 1px solid var(--line);
       border-radius: 10px;
       background: #fff;
       color: var(--text);
       font-size: 14px;
       font-weight: 600;
+      white-space: nowrap;
     }
     .checklabel input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       margin: 0;
       accent-color: var(--accent);
       cursor: pointer;
+      flex: 0 0 auto;
     }
     .plot-wrap {
       position: relative;
       height: min(68vh, 690px);
-      min-height: 430px;
+      min-height: 420px;
       padding: 10px;
     }
     canvas {
@@ -156,17 +160,66 @@
       transform: translate(12px, -50%);
     }
     .note {
-      padding: 0 24px 20px;
+      padding: 0 20px 16px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.35;
     }
     @media (max-width: 860px) {
       .controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
     @media (max-width: 760px) {
-      .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .plot-wrap { min-height: 390px; }
-      .formula { font-size: clamp(18px, 5vw, 28px); }
+      body { min-height: 100dvh; }
+      main { width: calc(100% - 8px); margin: 4px auto; }
+      .card { border-radius: 12px; }
+      header { padding: 10px 10px 8px; }
+      h1 { margin-bottom: 4px; font-size: 16px; line-height: 1.05; }
+      .formula {
+        gap: 2px;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        font-size: 13px;
+        line-height: 1;
+      }
+      .frac { margin: 0 1px; }
+      .frac .top { padding: 0 0.12em 0.03em; }
+      .frac .bottom { padding: 0.03em 0.12em 0; }
+      .controls {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 4px;
+        padding: 7px 8px;
+      }
+      label {
+        gap: 3px;
+        min-width: 0;
+        font-size: 10px;
+        line-height: 1;
+      }
+      input[type="number"] {
+        padding: 4px 5px;
+        border-radius: 7px;
+        font-size: 12px;
+        min-height: 29px;
+      }
+      .dense-wrap { grid-column: auto; }
+      .checklabel {
+        min-height: 29px;
+        padding: 4px;
+        justify-content: center;
+        gap: 0;
+        font-size: 0;
+        border-radius: 7px;
+      }
+      .checklabel input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+      }
+      .plot-wrap {
+        height: calc(100dvh - 156px);
+        min-height: 280px;
+        padding: 5px;
+      }
+      .note { display: none; }
     }
   </style>
 </head>
@@ -197,12 +250,11 @@
       <label>c
         <input id="c" type="number" value="36" step="0.1">
       </label>
-      <label>m (even integer)
+      <label title="Even integer">m
         <input id="m" type="number" value="4" min="2" step="2">
       </label>
-      <label>
-        Dense grid
-        <span class="checklabel"><input id="denseGrid" type="checkbox">Enable</span>
+      <label class="dense-wrap" title="Dense grid">Grid
+        <span class="checklabel"><input id="denseGrid" type="checkbox" aria-label="Enable dense grid">Enable</span>
       </label>
     </div>
 
@@ -211,7 +263,7 @@
       <div class="tooltip" id="tooltip"></div>
     </div>
     <div class="note">
-      The horizontal axis shows x(y), and the vertical axis shows y. One major grid square represents 1 unit on the x-axis and 0.5 units on the y-axis. Only the part of the curve where x(y) &lt; 0 is drawn. Enable “Dense grid” to show more frequent and more visible intermediate lines.
+      The horizontal axis shows x(y), and the vertical axis shows y. One major grid square represents 1 unit on the x-axis and 0.5 units on the y-axis. Only the part of the curve where x(y) &lt; 0 is drawn.
     </div>
   </section>
 </main>
@@ -316,7 +368,7 @@
 
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
-    const margin = { left: 72, right: 28, top: 24, bottom: 58 };
+    const margin = { left: 60, right: 20, top: 20, bottom: 48 };
     const pw = w - margin.left - margin.right;
     const ph = h - margin.top - margin.bottom;
 
@@ -356,7 +408,7 @@
     if (!allPoints.length) {
       state.bounds = null;
       tooltip.style.display = "none";
-      drawMessage(w, h, "There are no points with x(y) < 0 in the selected range");
+      drawMessage(w, h, "No points with x(y) < 0 in the current range");
       return;
     }
 
@@ -388,7 +440,7 @@
     const sy = y => margin.top + (viewMaxY - y) / (viewMaxY - viewMinY) * ph;
 
     ctx.fillStyle = css("--muted");
-    ctx.font = "12px system-ui, sans-serif";
+    ctx.font = window.innerWidth <= 760 ? "11px system-ui, sans-serif" : "12px system-ui, sans-serif";
     ctx.textBaseline = "middle";
 
     const majorXStep = 1;
@@ -408,17 +460,17 @@
     }
 
     for (let x = Math.ceil(viewMinX / majorXStep) * majorXStep; x <= viewMaxX + majorXStep * 1e-6; x += majorXStep) {
-      drawGridLineVertical(x, sx, margin, ph, css("--grid"), 1.25);
+      drawGridLineVertical(x, sx, margin, ph, css("--grid"), 1.15);
       const px = sx(x);
       ctx.textAlign = "center";
-      ctx.fillText(Number(x.toPrecision(6)).toString(), px, margin.top + ph + 22);
+      ctx.fillText(Number(x.toPrecision(6)).toString(), px, margin.top + ph + 18);
     }
 
     for (let y = Math.ceil(viewMinY / majorYStep) * majorYStep; y <= viewMaxY + majorYStep * 1e-6; y += majorYStep) {
-      drawGridLineHorizontal(y, sy, margin, pw, css("--grid"), 1.25);
+      drawGridLineHorizontal(y, sy, margin, pw, css("--grid"), 1.15);
       const py = sy(y);
       ctx.textAlign = "right";
-      ctx.fillText(Number(y.toPrecision(6)).toString(), margin.left - 10, py);
+      ctx.fillText(Number(y.toPrecision(6)).toString(), margin.left - 8, py);
     }
 
     ctx.strokeStyle = css("--line");
@@ -427,7 +479,7 @@
 
     if (viewMinX <= 0 && viewMaxX >= 0) {
       ctx.strokeStyle = css("--muted");
-      ctx.lineWidth = 1.4;
+      ctx.lineWidth = 1.35;
       ctx.beginPath();
       ctx.moveTo(sx(0), margin.top);
       ctx.lineTo(sx(0), margin.top + ph);
@@ -435,7 +487,7 @@
     }
     if (viewMinY <= 0 && viewMaxY >= 0) {
       ctx.strokeStyle = css("--muted");
-      ctx.lineWidth = 1.4;
+      ctx.lineWidth = 1.35;
       ctx.beginPath();
       ctx.moveTo(margin.left, sy(0));
       ctx.lineTo(margin.left + pw, sy(0));
@@ -464,12 +516,12 @@
     ctx.restore();
 
     ctx.fillStyle = css("--text");
-    ctx.font = "600 13px system-ui, sans-serif";
+    ctx.font = window.innerWidth <= 760 ? "600 12px system-ui, sans-serif" : "600 13px system-ui, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("x(y)", margin.left + pw / 2, h - 14);
+    ctx.fillText("x(y)", margin.left + pw / 2, h - 12);
 
     ctx.save();
-    ctx.translate(18, margin.top + ph / 2);
+    ctx.translate(14, margin.top + ph / 2);
     ctx.rotate(-Math.PI / 2);
     ctx.fillText("y", 0, 0);
     ctx.restore();
