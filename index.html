@@ -256,18 +256,18 @@
     <div class="controls">
       <label>
         <span class="param-head"><span>a</span><output id="aValue" class="param-value">3</output></span>
-        <input id="a" type="number" value="3" step="0.1">
-        <input id="aRange" class="mobile-range" type="range" min="-10" max="10" value="3" step="0.1" aria-label="a">
+        <input id="a" type="number" value="3" min="0.1" step="0.1">
+        <input id="aRange" class="mobile-range" type="range" min="0.1" max="10" value="3" step="0.1" aria-label="a">
       </label>
       <label>
         <span class="param-head"><span>b</span><output id="bValue" class="param-value">1</output></span>
-        <input id="b" type="number" value="1" step="0.1">
-        <input id="bRange" class="mobile-range" type="range" min="-10" max="10" value="1" step="0.1" aria-label="b">
+        <input id="b" type="number" value="1" min="0.1" step="0.1">
+        <input id="bRange" class="mobile-range" type="range" min="0.1" max="10" value="1" step="0.1" aria-label="b">
       </label>
       <label>
         <span class="param-head"><span>c</span><output id="cValue" class="param-value">36</output></span>
-        <input id="c" type="number" value="36" step="0.1">
-        <input id="cRange" class="mobile-range" type="range" min="0" max="72" value="36" step="0.1" aria-label="c">
+        <input id="c" type="number" value="36" min="0.1" step="0.1">
+        <input id="cRange" class="mobile-range" type="range" min="0.1" max="72" value="36" step="0.1" aria-label="c">
       </label>
       <label>
         <span class="param-head"><span>m (even)</span><output id="mValue" class="param-value">4</output></span>
@@ -340,6 +340,7 @@
     let value = Number(rawValue);
     if (!Number.isFinite(value)) return;
     if (id === "m") value = normalizeEvenInteger(value, 4);
+    else value = Math.max(0.1, value);
     numberInput.value = String(value);
     if (source !== rangeInput) {
       const min = Number(rangeInput.min);
@@ -350,9 +351,9 @@
   }
 
   function readParams() {
-    const a = numValue("a", 3);
-    const b = numValue("b", 1);
-    const c = numValue("c", 36);
+    const a = Math.max(0.1, numValue("a", 3));
+    const b = Math.max(0.1, numValue("b", 1));
+    const c = Math.max(0.1, numValue("c", 36));
     const m = normalizeEvenInteger(document.getElementById("m").value, 4);
     document.getElementById("m").value = String(m);
     return { a, b, c, m, denseGrid: denseGridInput.checked };
