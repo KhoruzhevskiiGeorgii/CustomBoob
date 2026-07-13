@@ -47,7 +47,8 @@
     let value = Number(rawValue);
     if (!Number.isFinite(value)) return;
     if (id === "m") value = normalizeEvenInteger(value, 4);
-    else value = Math.max(0.1, value);
+    else if (id === "a") value = Math.max(0.1, value);
+    else value = Math.max(0, value);
     numberInput.value = String(value);
     if (source !== rangeInput) {
       const min = Number(rangeInput.min);
@@ -59,8 +60,8 @@
 
   function readParams() {
     const a = Math.max(0.1, numValue("a", 3));
-    const b = Math.max(0.1, numValue("b", 1));
-    const c = Math.max(0.1, numValue("c", 36));
+    const b = Math.max(0, numValue("b", 1));
+    const c = Math.max(0, numValue("c", 36));
     const m = normalizeEvenInteger(document.getElementById("m").value, 4);
     document.getElementById("m").value = String(m);
     return { a, b, c, m, denseGrid: denseGridInput.checked };
